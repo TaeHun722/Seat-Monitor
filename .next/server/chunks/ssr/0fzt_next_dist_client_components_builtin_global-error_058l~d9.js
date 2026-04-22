@@ -1,0 +1,3 @@
+module.exports=[97977,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(26086);a.n(d("[project]/Seat-Monitor/src/node_modules/next/dist/client/components/builtin/global-error.js <module evaluation>"))},99998,(a,b,c)=>{let{createClientModuleProxy:d}=a.r(26086);a.n(d("[project]/Seat-Monitor/src/node_modules/next/dist/client/components/builtin/global-error.js"))},63622,a=>{"use strict";a.i(97977);var b=a.i(99998);a.n(b)},53449,a=>{a.n(a.i(63622))}];
+
+//# sourceMappingURL=0fzt_next_dist_client_components_builtin_global-error_058l~d9.js.map

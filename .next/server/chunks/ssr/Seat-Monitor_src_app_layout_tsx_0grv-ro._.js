@@ -1,0 +1,3 @@
+module.exports=[76562,a=>{"use strict";var b=a.i(91209);a.s(["default",0,function({children:a}){return(0,b.jsxs)("html",{lang:"ko",children:[(0,b.jsxs)("head",{children:[(0,b.jsx)("meta",{name:"apple-mobile-web-app-capable",content:"yes"}),(0,b.jsx)("meta",{name:"apple-mobile-web-app-status-bar-style",content:"black-translucent"})]}),(0,b.jsx)("body",{className:"bg-gray-950 text-white",children:a})]})},"metadata",0,{title:"좌석 모니터",description:"실시간 좌석 모니터링",manifest:"/manifest.json"},"viewport",0,{width:"device-width",initialScale:1,maximumScale:1,userScalable:!1,themeColor:"#030712"}])},61604,a=>{a.n(a.i(76562))}];
+
+//# sourceMappingURL=Seat-Monitor_src_app_layout_tsx_0grv-ro._.js.map

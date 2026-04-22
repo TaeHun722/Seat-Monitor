@@ -1,4 +1,7 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "root": ".",
   "env": {
     "NODE_TLS_REJECT_UNAUTHORIZED": "0"
   }

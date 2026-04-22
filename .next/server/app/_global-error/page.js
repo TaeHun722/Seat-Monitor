@@ -1,0 +1,10 @@
+var R=require("../../chunks/ssr/[turbopack]_runtime.js")("server/app/_global-error/page.js")
+R.c("server/chunks/ssr/[root-of-the-server]__04-2x6p._.js")
+R.c("server/chunks/ssr/0fzt_0mc5fv7._.js")
+R.c("server/chunks/ssr/0fzt_next_dist_esm_build_templates_app-page_0vl29hu.js")
+R.c("server/chunks/ssr/[root-of-the-server]__0bcnnlh._.js")
+R.c("server/chunks/ssr/[root-of-the-server]__0xlc04f._.js")
+R.c("server/chunks/ssr/0fzt_next_dist_client_components_builtin_global-error_058l~d9.js")
+R.c("server/chunks/ssr/Seat-Monitor_src__next-internal_server_app__global-error_page_actions_08gr5ad.js")
+R.m(89267)
+module.exports=R.m(89267).exports

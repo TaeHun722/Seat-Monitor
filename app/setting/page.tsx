@@ -1,22 +1,24 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+
+function getInitialValue(key: string, fallback: string): string {
+  if (typeof window === "undefined") return fallback;
+  return localStorage.getItem(key) || fallback;
+}
 
 export default function Settings() {
   const router = useRouter();
-  const [cookie, setCookie] = useState("");
-  const [roomId, setRoomId] = useState("4");
-  const [seats, setSeats] = useState("40,41,42,43,44,45");
+  // useEffect 대신 초기값에서 직접 localStorage 읽기
+  const [cookie, setCookie] = useState(() => getInitialValue("sm_cookie", ""));
+  const [roomId, setRoomId] = useState(() => getInitialValue("sm_roomId", "4"));
+  const [seats, setSeats] = useState(() =>
+    getInitialValue("sm_seats", "40,41,42,43,44,45")
+  );
   const [saved, setSaved] = useState(false);
   const [testResult, setTestResult] = useState<string | null>(null);
   const [testing, setTesting] = useState(false);
-
-  useEffect(() => {
-    setCookie(localStorage.getItem("sm_cookie") || "");
-    setRoomId(localStorage.getItem("sm_roomId") || "4");
-    setSeats(localStorage.getItem("sm_seats") || "40,41,42,43,44,45");
-  }, []);
 
   const save = () => {
     localStorage.setItem("sm_cookie", cookie.trim());
@@ -39,7 +41,10 @@ export default function Settings() {
       const config = {
         cookie: cookie.trim(),
         roomId: Number(roomId),
-        targetSeats: seats.split(",").map((s) => s.trim()).filter(Boolean),
+        targetSeats: seats
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean),
       };
 
       const res = await fetch("/api/check", {
@@ -48,7 +53,8 @@ export default function Settings() {
         body: JSON.stringify(config),
       });
 
-      const data = await res.json();
+      const data: { total?: number; emptyCount?: number; message?: string; error?: string } =
+        await res.json();
 
       if (res.status === 401) {
         setTestResult("❌ 세션 만료. 새 쿠키를 입력하세요.");
@@ -59,8 +65,9 @@ export default function Settings() {
       } else {
         setTestResult(`❌ 오류: ${data.message || data.error}`);
       }
-    } catch (e: any) {
-      setTestResult(`❌ 네트워크 오류: ${e.message}`);
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : "알 수 없는 오류";
+      setTestResult(`❌ 네트워크 오류: ${message}`);
     } finally {
       setTesting(false);
     }

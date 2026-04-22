@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 전체 화면 플래시 오버레이 */
+@keyframes fullFlash {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+.full-screen-flash {
+  animation: fullFlash 0.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* 스크롤바 숨기기 (모바일 최적화) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overscroll-behavior: none;
+}
+
+/* 새 빈 좌석 강조 카드 */
+@keyframes newSeatGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(74, 222, 128, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(74, 222, 128, 0.9), 0 0 60px rgba(74, 222, 128, 0.5);
+    transform: scale(1.05);
+  }
+}
+
+.new-seat-card {
+  animation: newSeatGlow 1s ease-in-out infinite;
+}

@@ -265,7 +265,7 @@ export default function Home() {
             onClick={startMonitor}
             className="flex-1 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 py-4 rounded-xl font-bold text-lg shadow-lg shadow-green-600/20 active:scale-95 transition-transform"
           >
-            ▶ 모니터링 시작
+            ▶ 모니터링 시작!
           </button>
         ) : (
           <>

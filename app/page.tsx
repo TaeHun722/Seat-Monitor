@@ -36,7 +36,10 @@ export default function Home() {
   const [newEmpty, setNewEmpty] = useState<string[]>([]);
   const [countdown, setCountdown] = useState(30);
   const [isRunning, setIsRunning] = useState(false);
-  const [cookieValid, setCookieValid] = useState(false);
+  const [cookieValid, setCookieValid] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    return !!localStorage.getItem("sm_cookie");
+  });
   const [checkCount, setCheckCount] = useState(0);
   const [alertLogs, setAlertLogs] = useState<AlertLog[]>([]);
   const [soundEnabled, setSoundEnabled] = useState(true);
@@ -144,8 +147,9 @@ export default function Home() {
       }
 
       prevEmptyRef.current = currentEmpty;
-    } catch (e: any) {
-      setError("네트워크 오류: " + e.message);
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : "알 수 없는 오류";
+      setError("네트워크 오류: " + message);
     } finally {
       setLoading(false);
       setCountdown(POLL_INTERVAL);
@@ -186,7 +190,7 @@ export default function Home() {
   // Polling
   useEffect(() => {
     if (isRunning) {
-      intervalRef.current = setInterval(checkSeats, POLL_INTERVA * 000);
+      intervalRef.current = setInterval(checkSeats, POLL_INTERVAL * 1000);
       countdownRef.current = setInterval(() => {
         setCountdown((c) => (c > 0 ? c - 1 : POLL_INTERVAL));
       }, 1000);
@@ -196,12 +200,6 @@ export default function Home() {
       if (countdownRef.current) clearInterval(countdownRef.current);
     };
   }, [isRunning, checkSeats]);
-
-  // 쿠키 존재 여부 체크
-  useEffect(() => {
-    const cookie = localStorage.getItem("sm_cookie");
-    if (cookie) setCookieValid(true);
-  }, []);
 
   return (
     <main className="min-h-screen bg-gray-950 text-white p-4 max-w-md mx-auto pb-20 relative">
